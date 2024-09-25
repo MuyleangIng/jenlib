@@ -22,7 +22,7 @@
     
 //     return type
 // }
-def checkProjectType() {
+def call() {
     def type = [:]
     
     if (fileExists('package.json')) {
