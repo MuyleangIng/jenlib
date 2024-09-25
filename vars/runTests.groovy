@@ -1,24 +1,19 @@
-def call() {
-    def type = [:]
-    
-    if (fileExists('package.json')) {
-        type.frontend = 'react'
-        if (fileExists('next.config.js')) {
-            type.frontend = 'nextjs'
-        }
+def call(projectType) {
+    if (projectType == 'frontend') {
+        println "Running frontend tests..."
+        sh """
+            npm install
+            npm run test
+        """
+    } else if (projectType == 'backend') {
+        println "Running backend tests..."
+        sh """
+            mvn test
+        """
+    } else if (projectType == 'database') {
+        println "Running database tests..."
+        sh """
+            psql -f run_database_tests.sql
+        """
     }
-    
-    if (fileExists('pom.xml')) {
-        type.backend = 'maven'
-    } else if (fileExists('build.gradle') || fileExists('build.gradle.kts')) {
-        type.backend = 'gradle'
-    } else if (fileExists('main.py') && fileExists('requirements.txt')) {
-        type.backend = 'fastapi'
-    }
-    
-    if (fileExists('flyway.conf') || fileExists('liquibase.properties')) {
-        type.database = 'postgres'
-    }
-    
-    return type
 }
