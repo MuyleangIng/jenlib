@@ -4,7 +4,7 @@ import org.istad.Database
 
 def call(Map projectType) {
     if (projectType.frontend) {
-        Frontend.runTests()
+        Frontend.runTests(this)
     }
     if (projectType.backend) {
         Backend.runTests(projectType.backend)

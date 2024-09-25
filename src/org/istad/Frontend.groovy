@@ -1,17 +1,17 @@
 package org.istad
 
 class Frontend {
-    static def runTests() {
+    static def runTests(script) {
         println "Running frontend tests..."
-        sh """
+        script.sh """
             npm install
             npm run test
         """
     }
 
-    static def build() {
+    static def build(script) {
         println "Building frontend..."
-        sh """
+        script.sh """
             npm install
             npm run build
         """
