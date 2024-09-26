@@ -24,14 +24,14 @@ pipeline {
             }
         }
 
-        // stage('Run Tests') {
-        //     steps {
-        //         script {
-        //             PROJECT_TYPE = checkProjectType()
-        //             runTests(PROJECT_TYPE)
-        //         }
-        //     }
-        // }
+        stage('Run Tests') {
+            steps {
+                script {
+                    PROJECT_TYPE = checkProjectType()
+                    runTests(PROJECT_TYPE)
+                }
+            }
+        }
 
         // stage('Build Project') {
         //     steps {
