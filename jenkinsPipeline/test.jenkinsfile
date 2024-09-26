@@ -11,7 +11,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/MuyleangIng/docs-automatex.git'
             }
         }
-        stage(){
+        stage('Check node version'){
             steps{
                 sh '''
                 node --version
