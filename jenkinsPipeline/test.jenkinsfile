@@ -25,7 +25,25 @@ pipeline {
                 }
             }
         }
-
+                stage('Determine Project Type') {
+            steps {
+                script {
+                    // Call checkProjectType once and store the result in an environment variable
+                    env.PROJECT_TYPE = checkProjectType()
+                       def dockerfileContent = libraryResource("${dockerfileType}-dockerfile")
+    writeFile file: 'Dockerfilev1', text: dockerfileContent
+    println "Dockerfilev1 for ${dockerfileType} has been written to the project root."
+                }
+            }
+        }
+        stage('Run Tests') {
+            
+            steps {
+               sh '''
+               ls -lrt
+               '''
+            }
+        }
         // stage('Run Tests') {
         //     when {
         //         expression { env.PROJECT_TYPE == 'desiredType' } // Replace 'desiredType' with your actual condition
