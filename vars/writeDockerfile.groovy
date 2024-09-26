@@ -1,12 +1,18 @@
-// 
-def call(Map projectType) {
+def call(def projectType) {
     def dockerfileType
-    if (projectType.frontend == 'nextjs') {
-        dockerfileType = 'next'
-    } else if (projectType.frontend == 'react') {
-        dockerfileType = 'react'
+
+    if (projectType instanceof Map) {
+        if (projectType.frontend == 'nextjs') {
+            dockerfileType = 'next'
+        } else if (projectType.frontend == 'react') {
+            dockerfileType = 'react'
+        } else {
+            error "Unsupported frontend type: ${projectType.frontend}"
+        }
+    } else if (projectType instanceof String) {
+        dockerfileType = projectType
     } else {
-        error "Unsupported frontend type: ${projectType.frontend}"
+        error "Unsupported projectType: ${projectType}"
     }
 
     def dockerfileContent = libraryResource("${dockerfileType}-dockerfile")
