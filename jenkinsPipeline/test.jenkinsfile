@@ -2,16 +2,22 @@
 
 pipeline {
     agent any
-   tools {
-        nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
-    }
+//    tools {
+//         nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
+//     }
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/MuyleangIng/docs-automatex.git'
             }
         }
-
+        stage(){
+            steps{
+                sh '''
+                node --version
+                '''
+            }
+        }
         stage('Determine Project Type') {
             steps {
                 script {
@@ -24,14 +30,14 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                script {
-                    PROJECT_TYPE = checkProjectType()
-                    runTests(PROJECT_TYPE)
-                }
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         script {
+        //             PROJECT_TYPE = checkProjectType()
+        //             runTests(PROJECT_TYPE)
+        //         }
+        //     }
+        // }
 
         // stage('Build Project') {
         //     steps {
@@ -43,12 +49,12 @@ pipeline {
         // }
         
 
-        // stage('Write Dockerfile') {
-        //     steps {
-        //         script {
-        //             writeDockerfile(env.PROJECT_TYPE)
-        //         }
-        //     }
-        // }
-    }
+    // stage('Write Dockerfile') {
+    // steps {
+    //     script {
+    //                  writeDockerfile(env.PROJECT_TYPE)
+    //              }
+    //         }
+    //     }
+    // }
 }
