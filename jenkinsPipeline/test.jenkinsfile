@@ -2,9 +2,9 @@
 
 pipeline {
     agent any
-    tools {
-        nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
-    }
+    // tools {
+    //     nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
+    // }
     stages {
         stage('Checkout Code') {
             steps {
