@@ -7,7 +7,7 @@ def call(Map projectType) {
         Frontend.runTests(this)
     }
     if (projectType.backend) {
-        Backend.runTests(projectType.backend)
+        Backend.runTests(projectType.backend,this)
     }
     if (projectType.database) {
         Database.runTests()
