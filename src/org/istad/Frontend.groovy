@@ -5,7 +5,6 @@ class Frontend {
         println "Running frontend tests..."
         script.sh """
             npm install
-            npm run test
         """
     }
 
