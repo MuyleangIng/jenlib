@@ -17,6 +17,8 @@ pipeline {
                 script {
                     // Call checkProjectType once and store the result in an environment variable
                     env.PROJECT_TYPE = checkProjectType()
+                    def type = checkProjectType()
+                    echo "Detected project types: ${type}"
                     echo "Detected project types: ${env.PROJECT_TYPE}"
                 }
             }
