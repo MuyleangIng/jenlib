@@ -2,20 +2,18 @@
 
 pipeline {
     agent any
-//    tools {
-//         nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
-//     }
+    tools {
+        nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
+    }
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/MuyleangIng/docs-automatex.git'
             }
         }
-        stage('Check node version'){
-            steps{
-                sh '''
-                node --version
-                '''
+        stage('Check Node Version') {
+            steps {
+                sh 'node --version'
             }
         }
         stage('Determine Project Type') {
@@ -23,38 +21,39 @@ pipeline {
                 script {
                     // Call checkProjectType once and store the result in an environment variable
                     env.PROJECT_TYPE = checkProjectType()
-                    def type = checkProjectType()
-                    echo "Detected project types: ${type}"
-                    echo "Detected project types: ${env.PROJECT_TYPE}"
+                    echo "Detected project type: ${env.PROJECT_TYPE}"
                 }
             }
         }
 
         // stage('Run Tests') {
+        //     when {
+        //         expression { env.PROJECT_TYPE == 'desiredType' } // Replace 'desiredType' with your actual condition
+        //     }
         //     steps {
         //         script {
-        //             PROJECT_TYPE = checkProjectType()
-        //             runTests(PROJECT_TYPE)
+        //             runTests(env.PROJECT_TYPE)
         //         }
         //     }
         // }
 
         // stage('Build Project') {
+        //     when {
+        //         expression { env.PROJECT_TYPE == 'desiredType' } // Adjust accordingly
+        //     }
         //     steps {
         //         script {
-        //             PROJECT_TYPE = checkProjectType()
-        //             buildProject(PROJECT_TYPE)
+        //             buildProject(env.PROJECT_TYPE)
         //         }
         //     }
         // }
         
-
-    // stage('Write Dockerfile') {
-    // steps {
-    //     script {
-    //                  writeDockerfile(env.PROJECT_TYPE)
-    //              }
-    //         }
-    //     }
-    // }
+        // stage('Write Dockerfile') {
+        //     steps {
+        //         script {
+        //             writeDockerfile(env.PROJECT_TYPE)
+        //         }
+        //     }
+        // }
+    }
 }
