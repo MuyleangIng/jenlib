@@ -9,6 +9,7 @@ class Frontend {
         """
     }
 
+
     static def build(script) {
         println "Building frontend..."
         script.sh """
