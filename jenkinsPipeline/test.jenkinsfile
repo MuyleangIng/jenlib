@@ -1,0 +1,52 @@
+@Library('jenlib') _
+
+pipeline {
+    agent any
+   tools {
+        nodejs 'Node-20'  // Use the Node.js installation configured in Jenkins
+    }
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/MuyleangIng/docs-automatex.git'
+            }
+        }
+
+        stage('Determine Project Type') {
+            steps {
+                script {
+                    // Call checkProjectType once and store the result in an environment variable
+                    env.PROJECT_TYPE = checkProjectType()
+                    echo "Detected project types: ${env.PROJECT_TYPE}"
+                }
+            }
+        }
+
+        // stage('Run Tests') {
+        //     steps {
+        //         script {
+        //             PROJECT_TYPE = checkProjectType()
+        //             runTests(PROJECT_TYPE)
+        //         }
+        //     }
+        // }
+
+        // stage('Build Project') {
+        //     steps {
+        //         script {
+        //             PROJECT_TYPE = checkProjectType()
+        //             buildProject(PROJECT_TYPE)
+        //         }
+        //     }
+        // }
+        
+
+        // stage('Write Dockerfile') {
+        //     steps {
+        //         script {
+        //             writeDockerfile(env.PROJECT_TYPE)
+        //         }
+        //     }
+        // }
+    }
+}
